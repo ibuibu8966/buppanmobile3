@@ -3,11 +3,17 @@ export function PricingBanner() {
     <section className="bg-amber-400 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            事務手数料込み・3ヶ月パック
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
+            事務手数料込み・
+            <br className="sm:hidden" />
+            3ヶ月パック
           </h2>
-          <p className="text-lg text-amber-900 font-semibold">
-            音声＋SMS込み・SIM登録・個別配送込み／MNP転出0円
+          <p className="text-sm sm:text-base lg:text-lg text-amber-900 font-semibold">
+            音声＋SMS込み・
+            <br className="sm:hidden" />
+            SIM登録・個別配送込み／
+            <br className="sm:hidden" />
+            MNP転出0円
           </p>
         </div>
 
@@ -18,14 +24,16 @@ export function PricingBanner() {
               <div className="inline-block px-4 py-1 bg-amber-500 text-white text-sm font-bold rounded-full mb-4">
                 おすすめ
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                50回線以上の一括申込
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+                50回線以上の
+                <br className="sm:hidden" />
+                一括申込
               </h3>
               <div className="my-6">
-                <span className="text-5xl font-bold text-primary-dark">
+                <span className="text-4xl sm:text-5xl font-bold text-primary-dark">
                   ¥4,200
                 </span>
-                <span className="text-gray-600 text-lg">/回線</span>
+                <span className="text-gray-600 text-base sm:text-lg">/回線</span>
               </div>
               <p className="text-gray-600 mb-4">
                 3ヶ月分・税込
@@ -50,14 +58,14 @@ export function PricingBanner() {
               <div className="inline-block px-4 py-1 bg-gray-200 text-gray-700 text-sm font-bold rounded-full mb-4">
                 標準
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
                 50回線未満
               </h3>
               <div className="my-6">
-                <span className="text-5xl font-bold text-gray-900">
+                <span className="text-4xl sm:text-5xl font-bold text-gray-900">
                   ¥4,600
                 </span>
-                <span className="text-gray-600 text-lg">/回線</span>
+                <span className="text-gray-600 text-base sm:text-lg">/回線</span>
               </div>
               <p className="text-gray-600 mb-4">
                 3ヶ月分・税込

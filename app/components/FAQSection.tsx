@@ -93,11 +93,15 @@ export function FAQSection() {
     <section className="py-20 bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             よくある質問
           </h2>
-          <p className="text-lg text-gray-600">
-            お困りのことがあれば、まずはこちらをご確認ください
+          <p className="text-sm sm:text-base lg:text-lg text-gray-600">
+            お困りのことがあれば、
+            <br className="sm:hidden" />
+            まずはこちらを
+            <br className="sm:hidden" />
+            ご確認ください
           </p>
         </div>
 
@@ -109,18 +113,18 @@ export function FAQSection() {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full text-left px-6 py-5 flex justify-between items-center hover:bg-gray-50 transition-colors"
+                className="w-full text-left px-4 sm:px-6 py-4 sm:py-5 flex justify-between items-center hover:bg-gray-50 transition-colors"
               >
-                <span className="font-semibold text-gray-900 pr-8">
+                <span className="text-sm sm:text-base font-semibold text-gray-900 pr-4 sm:pr-8">
                   {faq.question}
                 </span>
-                <span className="text-2xl text-primary-dark flex-shrink-0">
+                <span className="text-xl sm:text-2xl text-primary-dark flex-shrink-0">
                   {openIndex === index ? "−" : "+"}
                 </span>
               </button>
               {openIndex === index && (
-                <div className="px-6 pb-5">
-                  <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                <div className="px-4 sm:px-6 pb-4 sm:pb-5">
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{faq.answer}</p>
                 </div>
               )}
             </div>

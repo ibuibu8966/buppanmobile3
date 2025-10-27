@@ -46,11 +46,17 @@ export function FeaturesSection() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            BUPPAN MOBILEの特徴
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            BUPPAN MOBILE
+            <br className="sm:hidden" />
+            の特徴
           </h2>
-          <p className="text-lg text-gray-600">
-            仕入れ業務を支える、使いやすく頼れるモバイルサービス
+          <p className="text-sm sm:text-base lg:text-lg text-gray-600">
+            仕入れ業務を支える、
+            <br className="sm:hidden" />
+            使いやすく頼れる
+            <br className="sm:hidden" />
+            モバイルサービス
           </p>
         </div>
 

@@ -103,20 +103,22 @@ export function PricingTable() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             料金プラン
           </h2>
-          <p className="text-lg text-gray-600">
-            音声＋SMS込み・使うぶんだけに最適化
+          <p className="text-sm sm:text-base lg:text-lg text-gray-600">
+            音声＋SMS込み・
+            <br className="sm:hidden" />
+            使うぶんだけに最適化
           </p>
         </div>
 
         {/* タブ切り替え */}
         <div className="flex justify-center mb-12">
-          <div className="inline-flex rounded-2xl bg-white p-1 shadow-lg">
+          <div className="inline-flex flex-col sm:flex-row rounded-2xl bg-white p-1 shadow-lg gap-1 sm:gap-0">
             <button
               onClick={() => setSelectedPlan("standard")}
-              className={`px-8 py-3 rounded-xl font-semibold transition-all ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all ${
                 selectedPlan === "standard"
                   ? "bg-primary text-white shadow-md"
                   : "text-gray-600 hover:text-gray-900"
@@ -127,13 +129,14 @@ export function PricingTable() {
             </button>
             <button
               onClick={() => setSelectedPlan("bulk")}
-              className={`px-8 py-3 rounded-xl font-semibold transition-all ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all ${
                 selectedPlan === "bulk"
                   ? "bg-primary text-white shadow-md"
                   : "text-gray-600 hover:text-gray-900"
               }`}
             >
-              100回線以上（継続）専用
+              <span className="block">100回線以上</span>
+              <span className="block">（継続）専用</span>
               <span className="block text-xs">法人/代理店向け</span>
             </button>
           </div>

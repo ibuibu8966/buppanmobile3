@@ -15,20 +15,28 @@ export function HeroSection() {
         <div className="text-center">
           {/* テキスト背景ボックス - 最小限 */}
           <div className="inline-block">
-            <div className="bg-white/75 backdrop-blur-[2px] rounded-2xl px-6 py-4 mb-6 inline-block">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900">
+            <div className="bg-white/75 backdrop-blur-[2px] rounded-2xl px-4 py-3 mb-4 inline-block">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                 仕入れの相棒。
                 <br />
                 <span className="text-amber-600">
-                  音声込みで"使うぶんだけ"に最適化。
+                  音声込みで
+                  <br className="sm:hidden" />
+                  "使うぶんだけ"に最適化。
                 </span>
               </h1>
             </div>
-            <div className="bg-white/75 backdrop-blur-[2px] rounded-2xl px-6 py-3 mb-8 inline-block">
-              <p className="text-xl sm:text-2xl text-gray-700">
-                1GB/月880円・音声＋SMS込み。
+            <div className="bg-white/75 backdrop-blur-[2px] rounded-2xl px-4 py-2 mb-6 inline-block">
+              <p className="text-base sm:text-xl lg:text-2xl text-gray-700 leading-relaxed">
+                1GB/月880円・
+                <br className="sm:hidden" />
+                音声＋SMS込み。
                 <br />
-                重い月は100GB目安（10GB/3日）で使い倒せる。
+                重い月は100GB目安
+                <br className="sm:hidden" />
+                （10GB/3日）で
+                <br className="sm:hidden" />
+                使い倒せる。
               </p>
             </div>
           </div>
