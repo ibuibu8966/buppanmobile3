@@ -3,91 +3,39 @@
 import { useState } from "react";
 
 export function PricingTable() {
-  const [selectedPlan, setSelectedPlan] = useState<"standard" | "bulk">(
-    "standard"
+  const [selectedPlan, setSelectedPlan] = useState<"individual" | "corporate">(
+    "individual"
   );
+  const [isBulkDiscount, setIsBulkDiscount] = useState(false);
 
-  const standardPlans = [
+  const plans = [
     {
       capacity: "1GB",
-      price: "¥880",
+      price: 880,
       description: "音声＋SMS込み",
       limit: "100MB/3日で制御",
-      popular: true,
+      popular: false,
     },
     {
       capacity: "3GB",
-      price: "¥1,680",
+      price: 1380,
       description: "音声＋SMS込み",
       limit: "500MB/3日で制御",
+      popular: true,
     },
     {
       capacity: "7.5GB",
-      price: "¥2,280",
+      price: 2080,
       description: "音声＋SMS込み",
       limit: "1GB/3日で制御",
     },
     {
       capacity: "10GB",
-      price: "¥2,780",
+      price: 2680,
       description: "音声＋SMS込み",
       limit: "1.5GB/3日で制御",
     },
-    {
-      capacity: "20GB",
-      price: "¥3,580",
-      description: "音声＋SMS込み",
-      limit: "3GB/3日で制御",
-    },
-    {
-      capacity: "100GB目安",
-      price: "¥4,580",
-      description: "音声＋SMS込み",
-      limit: "10GB/3日で制御",
-    },
   ];
-
-  const bulkPlans = [
-    {
-      capacity: "1GB",
-      price: "¥780",
-      description: "音声＋SMS込み",
-      limit: "100MB/3日で制御",
-      popular: true,
-    },
-    {
-      capacity: "3GB",
-      price: "¥1,580",
-      description: "音声＋SMS込み",
-      limit: "500MB/3日で制御",
-    },
-    {
-      capacity: "7.5GB",
-      price: "¥2,180",
-      description: "音声＋SMS込み",
-      limit: "1GB/3日で制御",
-    },
-    {
-      capacity: "10GB",
-      price: "¥2,680",
-      description: "音声＋SMS込み",
-      limit: "1.5GB/3日で制御",
-    },
-    {
-      capacity: "20GB",
-      price: "¥3,480",
-      description: "音声＋SMS込み",
-      limit: "3GB/3日で制御",
-    },
-    {
-      capacity: "100GB目安",
-      price: "¥4,480",
-      description: "音声＋SMS込み",
-      limit: "10GB/3日で制御",
-    },
-  ];
-
-  const plans = selectedPlan === "standard" ? standardPlans : bulkPlans;
 
   return (
     <section className="relative py-20 overflow-hidden">
@@ -114,36 +62,54 @@ export function PricingTable() {
         </div>
 
         {/* タブ切り替え */}
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-8">
           <div className="inline-flex flex-col sm:flex-row rounded-2xl bg-white p-1 shadow-lg gap-1 sm:gap-0">
             <button
-              onClick={() => setSelectedPlan("standard")}
+              onClick={() => {
+                setSelectedPlan("individual");
+                setIsBulkDiscount(false);
+              }}
               className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all ${
-                selectedPlan === "standard"
+                selectedPlan === "individual"
                   ? "bg-primary text-white shadow-md"
                   : "text-gray-600 hover:text-gray-900"
               }`}
             >
-              標準プラン
-              <span className="block text-xs">個人・小規模法人</span>
+              個人
             </button>
             <button
-              onClick={() => setSelectedPlan("bulk")}
+              onClick={() => {
+                setSelectedPlan("corporate");
+              }}
               className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all ${
-                selectedPlan === "bulk"
+                selectedPlan === "corporate"
                   ? "bg-primary text-white shadow-md"
                   : "text-gray-600 hover:text-gray-900"
               }`}
             >
-              <span className="block">100回線以上</span>
-              <span className="block">（継続）専用</span>
-              <span className="block text-xs">法人/代理店向け</span>
+              法人
             </button>
           </div>
         </div>
 
+        {/* 100回線以上ボタン（法人選択時のみ表示） */}
+        {selectedPlan === "corporate" && (
+          <div className="flex justify-center mb-12">
+            <button
+              onClick={() => setIsBulkDiscount(!isBulkDiscount)}
+              className={`px-6 py-3 rounded-xl text-sm font-semibold transition-all ${
+                isBulkDiscount
+                  ? "bg-amber-400 text-white shadow-lg"
+                  : "bg-white text-gray-700 border-2 border-gray-300 hover:border-amber-400"
+              }`}
+            >
+              {isBulkDiscount ? "✓ " : ""}100回線以上
+            </button>
+          </div>
+        )}
+
         {/* プランカード */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {plans.map((plan, index) => (
             <div
               key={index}
@@ -163,10 +129,29 @@ export function PricingTable() {
                   {plan.capacity}
                 </h3>
                 <div className="my-4">
-                  <span className="text-4xl font-bold text-primary-dark">
-                    {plan.price}
-                  </span>
-                  <span className="text-gray-600">/月</span>
+                  {isBulkDiscount && selectedPlan === "corporate" ? (
+                    <>
+                      <div className="line-through text-2xl text-gray-400 mb-1">
+                        ¥{plan.price.toLocaleString()}/月
+                      </div>
+                      <div>
+                        <span className="text-4xl font-bold text-primary-dark">
+                          ¥{(plan.price - 100).toLocaleString()}
+                        </span>
+                        <span className="text-gray-600">/月</span>
+                      </div>
+                      <div className="text-xs text-amber-600 font-semibold mt-1">
+                        -100円
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-4xl font-bold text-primary-dark">
+                        ¥{plan.price.toLocaleString()}
+                      </span>
+                      <span className="text-gray-600">/月</span>
+                    </>
+                  )}
                 </div>
                 <p className="text-sm text-gray-600 mb-2">{plan.description}</p>
                 <p className="text-xs text-gray-500">{plan.limit}</p>
@@ -225,18 +210,6 @@ export function PricingTable() {
           </div>
         </div>
 
-        {selectedPlan === "bulk" && (
-          <div className="mt-8 text-center">
-            <div className="inline-block bg-amber-100 border-2 border-amber-400 rounded-2xl p-6">
-              <p className="text-amber-900 font-semibold">
-                100回線以上（継続）専用プラン
-              </p>
-              <p className="text-sm text-amber-800 mt-2">
-                継続利用＆毎月100回線以上のご契約で標準価格から税込100円引き
-              </p>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );

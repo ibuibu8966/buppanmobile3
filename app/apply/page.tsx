@@ -2,18 +2,11 @@
 
 import { useState, Suspense } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
 type Step = 1 | 2 | 3 | 4;
-type ApplicationType = "new" | "mnp";
 
 function ApplyForm() {
-  const searchParams = useSearchParams();
-  const initialType = (searchParams.get("type") as ApplicationType) || "new";
-
   const [currentStep, setCurrentStep] = useState<Step>(1);
-  const [applicationType, setApplicationType] =
-    useState<ApplicationType>(initialType);
 
   const steps = [
     { number: 1, title: "本人確認" },
@@ -42,33 +35,11 @@ function ApplyForm() {
       </nav>
 
       <div className="max-w-4xl mx-auto px-4 py-12">
-        {/* 申込タイプ選択 */}
+        {/* タイトル */}
         <div className="mb-12">
           <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-            お申し込み
+            新規お申し込み
           </h1>
-          <div className="flex justify-center gap-4 mb-8">
-            <button
-              onClick={() => setApplicationType("new")}
-              className={`px-8 py-4 rounded-2xl font-semibold transition-all ${
-                applicationType === "new"
-                  ? "bg-primary text-white shadow-lg"
-                  : "bg-white text-gray-600 border-2 border-gray-300"
-              }`}
-            >
-              新規申込
-            </button>
-            <button
-              onClick={() => setApplicationType("mnp")}
-              className={`px-8 py-4 rounded-2xl font-semibold transition-all ${
-                applicationType === "mnp"
-                  ? "bg-primary text-white shadow-lg"
-                  : "bg-white text-gray-600 border-2 border-gray-300"
-              }`}
-            >
-              MNP転入
-            </button>
-          </div>
         </div>
 
         {/* ステッパー */}
@@ -112,7 +83,6 @@ function ApplyForm() {
         <div className="bg-white rounded-3xl p-8 shadow-lg">
           {currentStep === 1 && (
             <Step1
-              applicationType={applicationType}
               onNext={() => setCurrentStep(2)}
             />
           )}
@@ -130,7 +100,6 @@ function ApplyForm() {
           )}
           {currentStep === 4 && (
             <Step4
-              applicationType={applicationType}
               onBack={() => setCurrentStep(3)}
             />
           )}
@@ -142,10 +111,8 @@ function ApplyForm() {
 
 // ステップ1: 本人確認
 function Step1({
-  applicationType,
   onNext,
 }: {
-  applicationType: ApplicationType;
   onNext: () => void;
 }) {
   return (
@@ -184,45 +151,6 @@ function Step1({
             className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-primary focus:outline-none"
           />
         </div>
-
-        {applicationType === "mnp" && (
-          <>
-            <div className="border-t-2 border-gray-200 pt-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">
-                MNP転入情報
-              </h3>
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                MNP予約番号
-              </label>
-              <input
-                type="text"
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-primary focus:outline-none"
-                placeholder="10桁の予約番号"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                有効期限
-              </label>
-              <input
-                type="date"
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-primary focus:outline-none"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                現在の電話番号
-              </label>
-              <input
-                type="tel"
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-primary focus:outline-none"
-                placeholder="090-1234-5678"
-              />
-            </div>
-          </>
-        )}
 
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -276,17 +204,9 @@ function Step2({ onNext, onBack }: { onNext: () => void; onBack: () => void }) {
 
   const plans = [
     { id: "1gb", capacity: "1GB", price: "¥880", limit: "100MB/3日" },
-    { id: "3gb", capacity: "3GB", price: "¥1,680", limit: "500MB/3日" },
-    { id: "7.5gb", capacity: "7.5GB", price: "¥2,280", limit: "1GB/3日" },
-    { id: "10gb", capacity: "10GB", price: "¥2,780", limit: "1.5GB/3日" },
-    { id: "20gb", capacity: "20GB", price: "¥3,580", limit: "3GB/3日" },
-    {
-      id: "100gb",
-      capacity: "100GB目安",
-      price: "¥4,580",
-      limit: "10GB/3日",
-      popular: true,
-    },
+    { id: "3gb", capacity: "3GB", price: "¥1,380", limit: "500MB/3日", popular: true },
+    { id: "7.5gb", capacity: "7.5GB", price: "¥2,080", limit: "1GB/3日" },
+    { id: "10gb", capacity: "10GB", price: "¥2,680", limit: "1.5GB/3日" },
   ];
 
   const options = [
@@ -623,10 +543,8 @@ function Step3({ onNext, onBack }: { onNext: () => void; onBack: () => void }) {
 
 // ステップ4: 最終確認
 function Step4({
-  applicationType,
   onBack,
 }: {
-  applicationType: ApplicationType;
   onBack: () => void;
 }) {
   const [agreed, setAgreed] = useState(false);
@@ -645,21 +563,19 @@ function Step4({
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
               <span className="text-gray-700">申込タイプ：</span>
-              <span className="font-semibold">
-                {applicationType === "new" ? "新規申込" : "MNP転入"}
-              </span>
+              <span className="font-semibold">新規申込</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-700">プラン：</span>
-              <span className="font-semibold">100GB目安（10GB/3日）</span>
+              <span className="font-semibold">3GB（500MB/3日）</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-700">月額料金：</span>
-              <span className="font-semibold">¥4,580</span>
+              <span className="font-semibold">¥1,380</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-700">初回費用（3ヶ月パック）：</span>
-              <span className="font-semibold text-lg">¥4,600</span>
+              <span className="font-semibold text-lg">¥4,140</span>
             </div>
           </div>
         </div>
