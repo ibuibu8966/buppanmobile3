@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 type Step = 1 | 2 | 3 | 4;
 type ApplicationType = "new" | "mnp";
 
-export default function ApplyPage() {
+function ApplyForm() {
   const searchParams = useSearchParams();
   const initialType = (searchParams.get("type") as ApplicationType) || "new";
 
@@ -737,5 +737,18 @@ function Step4({
         </button>
       </div>
     </div>
+  );
+}
+
+export default function ApplyPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="text-center">
+        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        <p className="mt-4 text-gray-600">読み込み中...</p>
+      </div>
+    </div>}>
+      <ApplyForm />
+    </Suspense>
   );
 }
