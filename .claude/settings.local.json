@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(xcopy:*)",
+      "Bash(taskkill:*)",
+      "Bash(npx kill-port:*)",
+      "Bash(copy \"c:\\Users\\ibuki\\Dropbox\\プログラム系\\Next.js\\buppanmobile\\buppanmobile3\\参照\\20251022133036857.pdf\" \"c:\\Users\\ibuki\\Dropbox\\プログラム系\\Next.js\\buppanmobile\\buppanmobile3\\public\\documents\\20251022133036857.pdf\")",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
